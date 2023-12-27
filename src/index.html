@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+     function isContainNumber(num, digit) {
+      let divider = '1';
+  while (Math.trunc(num / divider) > 0) {
+    console.log(num/divider);
+    if (Math.trunc(num / divider) % 10 === digit) {
+      console.log('(Math.trunc(num / divider) % 10 ', (num / divider) % 10 );
+
+      return true;
+    }
+ divider += '0';
+  }
+
+  console.log(false);
+}
+isContainNumber(12345, 3);
+    </script>
+  </body>
+</html>
