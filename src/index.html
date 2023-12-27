@@ -7,50 +7,71 @@
   </head>
   <body>
     <script>
-      //          [
-      //  *          [1, 2, 3],
-      //  *  3  =>   [8, 9, 4],
-      //  *          [7, 6, 5]
-      //  *        ]
-      //  *        [
-      //  *          [1,  2,  3,  4],
-      //  *  4  =>   [12, 13, 14, 5],
-      //  *          [11, 16, 15, 6],
-      //  *          [10, 9,  8,  7]
-      //  *        ]
+      //      [                 [
+      //  *    [1, 2, 3],        [7, 4, 1],
+      //  *    [4, 5, 6],  =>    [8, 5, 2],
+      //  *    [7, 8, 9]         [9, 6, 3]
+      //  *  ]                 ]
       //  */
-      function getSpiralMatrix(size) {
-        const matrix = new Array(size).fill().map(() => new Array(size));
-  let number = 1;
-  for (let circle = 0; circle < size; circle += 1) {
-    for (let i = 0 + circle; i < size - circle; i += 1) {
-      matrix[circle][i] = number;
-      number += 1;
-    }
-    number -= 1;
-    for (let i = 0 + circle; i < size - circle; i += 1) {
-      matrix[i][size - 1 - circle] = number;
-      number += 1;
-    }
-    number -= 1;
-    for (let i = size - 1 - circle; i >= 0 + circle; i -= 1) {
-      matrix[size - 1 - circle][i] = number;
-      number += 1;
-    }
-    number -= 1;
-    for (let i = size - 1 - circle; i >= 1 + circle; i -= 1) {
-      matrix[i][circle] = number;
-      number += 1;
-    }
-    if (number > size ** 2) {
-      break;
-    }
-  }
-  console.log(matrix);
-  return matrix;
+      function rotateMatrix(matrix) {
+//         const resultMatrix = [];
+//         let newMatrix = Object.assign([], matrix);
+//         const size = matrix.length - 1;
+// console.log('matrix', matrix);
+// // newMatrix[0] = [0, 0, 0];
+// console.log('newMatrix-1', newMatrix);
+//         for (let i = 0; i <= size; i += 1) {
+//           resultMatrix[i] = [];
+//         }
+
+//         for (let step = 0; step <= size; step += 1) {
+//           for (let i = 0; i <= size; i += 1) {
+//             resultMatrix[step][size - i] = newMatrix[i][step];
+//           }
+//         }
+
+//         console.log(resultMatrix);
+
+
+        // let resultMatrix = [];
+        // let size = matrix.length - 1;
+
+        // for (let i = 0; i <= size; i += 1) {
+        //   resultMatrix[i] = [];
+        // }
+
+        // for (let step = 0; step <= size; step++) {
+        //   for (let i = 0; i <= size; i += 1) {
+        //     resultMatrix[step][size - i] = matrix[i][step];
+        //     // console.log(resultMatrix[step][size - i]);
+        //   }
+
+        let result = [];
+          const resultMatrix = [];
+          const size = matrix.length - 1;
+
+          for (let step = 0; step <= size; step += 1) {
+            for (let i = 0; i <= size; i += 1) {
+              result.unshift(matrix[i][step]);
+            }
+            resultMatrix.push(result);
+            result = [];
+        }
+        let newMatrix = Object.assign([], matrix);
+        newMatrix[0] = resultMatrix[0];
+        newMatrix[1] = resultMatrix[1];
+        newMatrix[2] = resultMatrix[2];
+
+        console.log('resultMatrix', resultMatrix);
+        console.log('newMatrix', newMatrix);
       }
 
-      getSpiralMatrix(9);
+      let m = [
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9],
+      ];
+      rotateMatrix(m);
     </script>
   </body>
 </html>
