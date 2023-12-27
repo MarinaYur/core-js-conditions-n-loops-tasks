@@ -7,21 +7,50 @@
   </head>
   <body>
     <script>
-     function isContainNumber(num, digit) {
-      let divider = '1';
-  while (Math.trunc(num / divider) > 0) {
-    console.log(num/divider);
-    if (Math.trunc(num / divider) % 10 === digit) {
-      console.log('(Math.trunc(num / divider) % 10 ', (num / divider) % 10 );
-
-      return true;
+      //          [
+      //  *          [1, 2, 3],
+      //  *  3  =>   [8, 9, 4],
+      //  *          [7, 6, 5]
+      //  *        ]
+      //  *        [
+      //  *          [1,  2,  3,  4],
+      //  *  4  =>   [12, 13, 14, 5],
+      //  *          [11, 16, 15, 6],
+      //  *          [10, 9,  8,  7]
+      //  *        ]
+      //  */
+      function getSpiralMatrix(size) {
+        const matrix = new Array(size).fill().map(() => new Array(size));
+  let number = 1;
+  for (let circle = 0; circle < size; circle += 1) {
+    for (let i = 0 + circle; i < size - circle; i += 1) {
+      matrix[circle][i] = number;
+      number += 1;
     }
- divider += '0';
+    number -= 1;
+    for (let i = 0 + circle; i < size - circle; i += 1) {
+      matrix[i][size - 1 - circle] = number;
+      number += 1;
+    }
+    number -= 1;
+    for (let i = size - 1 - circle; i >= 0 + circle; i -= 1) {
+      matrix[size - 1 - circle][i] = number;
+      number += 1;
+    }
+    number -= 1;
+    for (let i = size - 1 - circle; i >= 1 + circle; i -= 1) {
+      matrix[i][circle] = number;
+      number += 1;
+    }
+    if (number > size ** 2) {
+      break;
+    }
   }
+  console.log(matrix);
+  return matrix;
+      }
 
-  console.log(false);
-}
-isContainNumber(12345, 3);
+      getSpiralMatrix(9);
     </script>
   </body>
 </html>
