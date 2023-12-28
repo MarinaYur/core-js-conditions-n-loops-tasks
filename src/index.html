@@ -7,65 +7,41 @@
   </head>
   <body>
     <script>
-      // @example:
-      //  *  '012345', 1 => '024135'
-      //  *  'qwerty', 1 => 'qetwry'
-      //  *  '012345', 2 => '024135' => '043215'
-      //  *  'qwerty', 2 => 'qetwry' => 'qtrewy'
-      //  *  '012345', 3 => '024135' => '043215' => '031425'
-      //  *  'qwerty', 3 => 'qetwry' => 'qtrewy' => 'qrwtey'
+      //      @example:
+      //  *  [2, 9, 5]       => [2, 5, 9]
+      //  *  [2, 9, 5, 9]    => [2, 5, 9, 9]
+      //  *  [-2, 9, 5, -3]  => [-3, -2, 5, 9]
       //  */
-      function shuffleChar(str, iterations) {
-        let steps = iterations;
-        let newStr = str;
-        for (let k = 0; k < steps; k++) {
-          let newStrStart = '';
-          let newStrEnd = '';
-          for (let i = 0; i < newStr.length; i += 2) {
-            console.log('newStr in 2 for `&{k}`', newStr);
-            newStrStart += newStr[i];
-            newStrEnd += newStr[i + 1];
-          }
-          newStr = newStrStart + newStrEnd;
-        }
-        console.log(newStr);
-        // return newStr;
+      function sortByAsc(arr) {
+        if (arr.length <= 1) {
+    return arr;
+  }
+  const pivot = arr[0];
+  let leftFromPivot = [];
+  let rightFromPivot = [];
+  for (let i = 1; i < arr.length; i += 1) {
+    if (arr[i] < pivot) {
+      leftFromPivot[leftFromPivot.length] = arr[i];
+    } else {
+      rightFromPivot[rightFromPivot.length] = arr[i];
+    }
+  }
+  leftFromPivot = sortByAsc(leftFromPivot);
+  rightFromPivot = sortByAsc(rightFromPivot);
+  const resultArr = arr;
+  for (let i = 0; i < leftFromPivot.length; i += 1) {
+    resultArr[i] = leftFromPivot[i];
+  }
+  resultArr[leftFromPivot.length] = pivot;
+
+  for (let i = 1; i < rightFromPivot.length; i += 1) {
+    resultArr[leftFromPivot.length + i] = rightFromPivot[i];
+  }
+        // return resultArr;
+
+        console.log(resultArr);
       }
-
-      shuffleChar('qwerty', 3);
-
-      // let steps = iterations;
-      //   let newStrStart = '';
-      //   let newStrEnd = '';
-      //   let newStr = '';
-      //  if (steps > 0) {
-      //     for (let i = 0; i < str.length; i += 1) {
-      //       if (i % 2 !== 0) {
-      //         newStrEnd += str[i];
-      //       } else {
-      //         newStrStart += str[i];
-      //       }
-      //       newStr = newStrStart + newStrEnd;
-      //     }
-      //     steps -= 1;
-      //     shuffleChar(newStr, steps);
-      //   }
-
-      //   console.log(newStr);
-      //   // console.log(newStrStart + newStrEnd);
-      //   return newStr;
-
-      // let temporary = 0;
-      // let newStrStart = '';
-      // let newStrEnd = '';
-      // const halfStrLength = str.length / 2;
-      // for (let i = 0; i < str.length; i += 1) {
-      //   if (i % 2 !== 0) {
-      //     newStrEnd = newStrEnd + str[i];
-      // } else {
-      // newStrEnd =  newStrEnd + str[i];
-      //   temporary = str[i];}
-      // }
+      sortByAsc([-2, 9, 5, -3]);
     </script>
   </body>
 </html>
