@@ -7,86 +7,65 @@
   </head>
   <body>
     <script>
-          //      * @example:
-          //  *  [2, 9, 5]       => [2, 5, 9]
-          //  *  [2, 9, 5, 9]    => [2, 5, 9, 9]
-          //  *  [-2, 9, 5, -3]  => [-3, -2, 5, 9]
-          function sortByAsc(arr) {
-            const arrLength = arr.length;
-            let result = [];
-            let arrMaxElem = 0;
-            // while (arr[arrLength - 1] !== arrMaxElem) {
-            for (let i = 1; i < arrLength; i += 1) {
-              for (let i = 1; i < arrLength; i += 1) {
-                if (arr[i] < arr[i - 1]) {
-                  arrMaxElem = arr[i - 1];
-                  arr[i - 1] = arr[i];
-                  arr[i] = arrMaxElem;
-                  // }
-                }
-              }
-            }
+      // @example:
+      //  *  '012345', 1 => '024135'
+      //  *  'qwerty', 1 => 'qetwry'
+      //  *  '012345', 2 => '024135' => '043215'
+      //  *  'qwerty', 2 => 'qetwry' => 'qtrewy'
+      //  *  '012345', 3 => '024135' => '043215' => '031425'
+      //  *  'qwerty', 3 => 'qetwry' => 'qtrewy' => 'qrwtey'
+      //  */
+      function shuffleChar(str, iterations) {
+        let steps = iterations;
+        let newStr = str;
+        for (let k = 0; k < steps; k++) {
+          let newStrStart = '';
+          let newStrEnd = '';
+          for (let i = 0; i < newStr.length; i += 2) {
+            console.log('newStr in 2 for `&{k}`', newStr);
+            newStrStart += newStr[i];
+            newStrEnd += newStr[i + 1];
+          }
+          newStr = newStrStart + newStrEnd;
+        }
+        console.log(newStr);
+        // return newStr;
+      }
 
-            // const arrFromArr = arr;
-            // const arrLength = arr.length;
-            // let arrMinElem = [0, arrFromArr[0]];
-            // let temporary = 0;
-            // let counter = 0;
-            // for (let k = 0; k < arrLength; k += 1) {
-            //   for (let i = counter; i < arrLength; i += 1) {
-            //     console.log('arrMinElem', arrMinElem);
-            //     if (arr[i] < arrMinElem[1]) {
-            //       arrMinElem = [i, arr[i]];
-            //       console.log('arrMinElem 1', arrMinElem);
-            //     }
-            //   }
+      shuffleChar('qwerty', 3);
 
-
-
-        //       temporary = arr[counter];
-        //       arr[counter] = arrMinElem[1];
-        //       counter += 1;
-        //       arr[arrMinElem[0]] = temporary;
-        //       arrMinElem = [counter, arrFromArr[counter]];
-        //     }
-
-
-        //     while (k < arrLength) {
-        // for (let i = counter; i < arrLength; i += 1) {
-        //   if (arr[i] < arrMinElem[1]) {
-        //     arrMinElem = [i, arr[i]];
-        //   }
-        // }
-        // temporary = arr[counter];
-        // const q = arrMinElem[1];
-        // arrFromArr[counter] = q;
-        // counter += 1;
-        // arrFromArr[arrMinElem[0]] = temporary;
-        // arrMinElem = [counter, arrFromArr[counter]];
-        // k += 1;
-
-      // const arrFromArr = arr;
-      // const arrLength = arr.length;
-      // let arrMinElem = arrFromArr[0];
-      // let k = 0;
-      // const result = [];
-      // while (k < arrLength) {
-      //   for (let i = 0; i < arrLength; i += 1) {
-      //           if (arr[i] < arr[i - 1] && arr[i]&& arr[i] !== 'p') {
-      //             arrMinElem = arr[i];
-      //             arr[i] = 'p';
-
-      //       result.push(arrMinElem);
+      // let steps = iterations;
+      //   let newStrStart = '';
+      //   let newStrEnd = '';
+      //   let newStr = '';
+      //  if (steps > 0) {
+      //     for (let i = 0; i < str.length; i += 1) {
+      //       if (i % 2 !== 0) {
+      //         newStrEnd += str[i];
+      //       } else {
+      //         newStrStart += str[i];
+      //       }
+      //       newStr = newStrStart + newStrEnd;
       //     }
+      //     steps -= 1;
+      //     shuffleChar(newStr, steps);
       //   }
 
-      //   k += 1;
-      //     }
-      //     console.log(result);
-            console.log(arr);
-        }
+      //   console.log(newStr);
+      //   // console.log(newStrStart + newStrEnd);
+      //   return newStr;
 
-          sortByAsc([2, 9, 5, 9]);
+      // let temporary = 0;
+      // let newStrStart = '';
+      // let newStrEnd = '';
+      // const halfStrLength = str.length / 2;
+      // for (let i = 0; i < str.length; i += 1) {
+      //   if (i % 2 !== 0) {
+      //     newStrEnd = newStrEnd + str[i];
+      // } else {
+      // newStrEnd =  newStrEnd + str[i];
+      //   temporary = str[i];}
+      // }
     </script>
   </body>
 </html>
