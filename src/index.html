@@ -7,71 +7,86 @@
   </head>
   <body>
     <script>
-      //      [                 [
-      //  *    [1, 2, 3],        [7, 4, 1],
-      //  *    [4, 5, 6],  =>    [8, 5, 2],
-      //  *    [7, 8, 9]         [9, 6, 3]
-      //  *  ]                 ]
-      //  */
-      function rotateMatrix(matrix) {
-//         const resultMatrix = [];
-//         let newMatrix = Object.assign([], matrix);
-//         const size = matrix.length - 1;
-// console.log('matrix', matrix);
-// // newMatrix[0] = [0, 0, 0];
-// console.log('newMatrix-1', newMatrix);
-//         for (let i = 0; i <= size; i += 1) {
-//           resultMatrix[i] = [];
-//         }
-
-//         for (let step = 0; step <= size; step += 1) {
-//           for (let i = 0; i <= size; i += 1) {
-//             resultMatrix[step][size - i] = newMatrix[i][step];
-//           }
-//         }
-
-//         console.log(resultMatrix);
-
-
-        // let resultMatrix = [];
-        // let size = matrix.length - 1;
-
-        // for (let i = 0; i <= size; i += 1) {
-        //   resultMatrix[i] = [];
-        // }
-
-        // for (let step = 0; step <= size; step++) {
-        //   for (let i = 0; i <= size; i += 1) {
-        //     resultMatrix[step][size - i] = matrix[i][step];
-        //     // console.log(resultMatrix[step][size - i]);
-        //   }
-
-        let result = [];
-          const resultMatrix = [];
-          const size = matrix.length - 1;
-
-          for (let step = 0; step <= size; step += 1) {
-            for (let i = 0; i <= size; i += 1) {
-              result.unshift(matrix[i][step]);
+          //      * @example:
+          //  *  [2, 9, 5]       => [2, 5, 9]
+          //  *  [2, 9, 5, 9]    => [2, 5, 9, 9]
+          //  *  [-2, 9, 5, -3]  => [-3, -2, 5, 9]
+          function sortByAsc(arr) {
+            const arrLength = arr.length;
+            let result = [];
+            let arrMaxElem = 0;
+            // while (arr[arrLength - 1] !== arrMaxElem) {
+            for (let i = 1; i < arrLength; i += 1) {
+              for (let i = 1; i < arrLength; i += 1) {
+                if (arr[i] < arr[i - 1]) {
+                  arrMaxElem = arr[i - 1];
+                  arr[i - 1] = arr[i];
+                  arr[i] = arrMaxElem;
+                  // }
+                }
+              }
             }
-            resultMatrix.push(result);
-            result = [];
+
+            // const arrFromArr = arr;
+            // const arrLength = arr.length;
+            // let arrMinElem = [0, arrFromArr[0]];
+            // let temporary = 0;
+            // let counter = 0;
+            // for (let k = 0; k < arrLength; k += 1) {
+            //   for (let i = counter; i < arrLength; i += 1) {
+            //     console.log('arrMinElem', arrMinElem);
+            //     if (arr[i] < arrMinElem[1]) {
+            //       arrMinElem = [i, arr[i]];
+            //       console.log('arrMinElem 1', arrMinElem);
+            //     }
+            //   }
+
+
+
+        //       temporary = arr[counter];
+        //       arr[counter] = arrMinElem[1];
+        //       counter += 1;
+        //       arr[arrMinElem[0]] = temporary;
+        //       arrMinElem = [counter, arrFromArr[counter]];
+        //     }
+
+
+        //     while (k < arrLength) {
+        // for (let i = counter; i < arrLength; i += 1) {
+        //   if (arr[i] < arrMinElem[1]) {
+        //     arrMinElem = [i, arr[i]];
+        //   }
+        // }
+        // temporary = arr[counter];
+        // const q = arrMinElem[1];
+        // arrFromArr[counter] = q;
+        // counter += 1;
+        // arrFromArr[arrMinElem[0]] = temporary;
+        // arrMinElem = [counter, arrFromArr[counter]];
+        // k += 1;
+
+      // const arrFromArr = arr;
+      // const arrLength = arr.length;
+      // let arrMinElem = arrFromArr[0];
+      // let k = 0;
+      // const result = [];
+      // while (k < arrLength) {
+      //   for (let i = 0; i < arrLength; i += 1) {
+      //           if (arr[i] < arr[i - 1] && arr[i]&& arr[i] !== 'p') {
+      //             arrMinElem = arr[i];
+      //             arr[i] = 'p';
+
+      //       result.push(arrMinElem);
+      //     }
+      //   }
+
+      //   k += 1;
+      //     }
+      //     console.log(result);
+            console.log(arr);
         }
-        let newMatrix = Object.assign([], matrix);
-        newMatrix[0] = resultMatrix[0];
-        newMatrix[1] = resultMatrix[1];
-        newMatrix[2] = resultMatrix[2];
 
-        console.log('resultMatrix', resultMatrix);
-        console.log('newMatrix', newMatrix);
-      }
-
-      let m = [
-        [1, 2, 3],
-        [4, 5, 6],
-        [7, 8, 9],
-      ];
-      rotateMatrix(m);
+          sortByAsc([2, 9, 5, 9]);
     </script>
   </body>
 </html>
