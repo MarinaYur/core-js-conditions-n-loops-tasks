@@ -7,41 +7,58 @@
   </head>
   <body>
     <script>
-      //      @example:
-      //  *  [2, 9, 5]       => [2, 5, 9]
-      //  *  [2, 9, 5, 9]    => [2, 5, 9, 9]
-      //  *  [-2, 9, 5, -3]  => [-3, -2, 5, 9]
-      //  */
-      function sortByAsc(arr) {
-        if (arr.length <= 1) {
-    return arr;
-  }
-  const pivot = arr[0];
-  let leftFromPivot = [];
-  let rightFromPivot = [];
-  for (let i = 1; i < arr.length; i += 1) {
-    if (arr[i] < pivot) {
-      leftFromPivot[leftFromPivot.length] = arr[i];
+//        * Returns the nearest largest integer consisting of the digits of the given positive integer.
+//  * If there is no such number, it returns the original number.
+//  * Usage of String class methods is not allowed in this task.
+//  *
+//  * @example:
+//  * 12345    => 12354
+//  * 123450   => 123504
+//  * 12344    => 12434
+//  * 123440   => 124034
+//  * 1203450  => 1203504
+//  * 90822    => 92028
+//  * 321321   => 322113
+//  *
+//  * @param {number} number The source number
+//  * @returns {number} The nearest larger number, or original number if none exists.
+//  */
+function getNearestBigger(number) {
+  let arrFromNumber = String(number).split('');
+  console.log('arrFromNumber', arrFromNumber);
+  let minRightDigit = arrFromNumber[arrFromNumber.length - 1];
+  let lessAfterBigger = '';
+   let indexOfLess;
+   // Пройдем по заданному числу, начиная с крайней правой цифры, пока не найдем цифру, которая меньше предыдущей пройденной цифры: lessAfterBigger
+  for (let i = arrFromNumber.length - 2; i >= 0; i -= 1) {
+    if (arrFromNumber[i] >= minRightDigit) {
+      minRightDigit = arrFromNumber[i];
     } else {
-      rightFromPivot[rightFromPivot.length] = arr[i];
+      lessAfterBigger = arrFromNumber[i];
+      indexOfLess = i;
+      break;
     }
   }
-  leftFromPivot = sortByAsc(leftFromPivot);
-  rightFromPivot = sortByAsc(rightFromPivot);
-  const resultArr = arr;
-  for (let i = 0; i < leftFromPivot.length; i += 1) {
-    resultArr[i] = leftFromPivot[i];
+  //найдем справа от найденной выше цифры lessAfterBigger наименьшую цифру, большую, чем lessAfterBigger и поменяем их местами
+  let tailAfterLess = arrFromNumber.slice(indexOfLess + 1);
+  //отсортировали хвост массива после lessAfterBigger
+  tailAfterLess.sort();
+  for (let j = 0; j < tailAfterLess.length; j += 1) {
+    if (tailAfterLess[j] > lessAfterBigger) {
+      let l = lessAfterBigger;
+      lessAfterBigger = tailAfterLess[j];
+      tailAfterLess[j] = l;
+      arrFromNumber[indexOfLess] = lessAfterBigger;
+      break;
+    }
   }
-  resultArr[leftFromPivot.length] = pivot;
+ arrFromNumber.splice(arrFromNumber.length - tailAfterLess.length, tailAfterLess.length, ...tailAfterLess);
+  // console.log('arrFromNumber', arrFromNumber);
+  // console.log('result', arrFromNumber.join(''));
 
-  for (let i = 1; i < rightFromPivot.length; i += 1) {
-    resultArr[leftFromPivot.length + i] = rightFromPivot[i];
-  }
-        // return resultArr;
+}
 
-        console.log(resultArr);
-      }
-      sortByAsc([-2, 9, 5, -3]);
+getNearestBigger(12344);
     </script>
   </body>
 </html>
